@@ -1,0 +1,16 @@
+* {
+    font-family: monospace;
+    border: 1px solid beige;
+}
+
+.bookshelf {
+    display: grid;
+    grid-template-columns: 25% 25%;
+    grid-template-rows: 50% 50%;
+    gap: 50px;
+}
+
+.cover {
+    width: 200px;
+    height: 300px;
+}
