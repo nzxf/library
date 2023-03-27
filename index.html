@@ -7,15 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative&family=Inter:wght@300&family=Open+Sans:wght@500&family=Orbitron:wght@400;500;700&family=Roboto:wght@100;300;400;700&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <main>
+    <header>
         <h1>Welcome to nzxf personal Library</h1>
-        <h2>Current Available Books</h2>
+    </header>
+    <main>
         <div class="bookshelf">
+            <h2>Current Available Books</h2>
+        </div>
+        <div class="side-bar">
+            <div class="add-book">
+                <h2>Add a New Book</h2>
+                <form action="#">
+                    <div>
+                        <label for="title">Title: </label>
+                        <input id="title" type="text" name="inputTitle">
+                    </div>
+                    <div>
+                        <label for="author">Author: </label>
+                        <input id="author" type="text" name="inputAuthor">
+                    </div>
+                    <div>
+                        <label for="pages">Pages: </label>
+                        <input id="pages" type="number" name="inputPages">
+                    </div>
+                    <div>
+                        <label for="synopsis">Synopsis: </label>
+                        <textarea id="synopsis" name="inputSynopsis" cols="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label for="cover">Cover (url): </label>
+                        <input id="cover" type="text" name="inputCover">
+                    </div>
+                    <button class="addButton" type="submit">Add to Library</button>
+                </form>
+            </div>
         </div>
     </main>
+    <footer>
+        <span>&copy; library 2023</span>
+    </footer>
 
     <script src="app.js"></script>
 </body>
