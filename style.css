@@ -83,7 +83,7 @@ main {
 }
 
 .side-bar {
-    height: 330px;
+    height: 400px;
     margin-left: 25px;
     background-color: white;
     border: 10px solid white;
@@ -91,7 +91,8 @@ main {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-form div {
+form>div{
+    width: auto;
     display: flex;
     flex-direction: column;
 }
