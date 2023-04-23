@@ -1,14 +1,14 @@
 //CONSTRUCTOR: BOOK
 function Book(title, author, pages, readStatus, cover, synopsis) {
-    this.title = title
-    this.author = author
-    this.pages = pages
+    this.title = title || 'untitled' 
+    this.author = author || 'anonymous'
+    this.pages = pages || 0
     this.readStatus = readStatus
-    this.cover = cover
-    this.synopsis = synopsis
+    this.cover = cover || 'https://i.pinimg.com/originals/25/2a/04/252a045199e33164a8b7577fc001851a.jpg'
+    this.synopsis = synopsis || 'empty'
 }
 //PROTOTYPE
-Book.prototype.info = function () {
+Book.prototype.info = function() {
     let read = ''
     if (this.readStatus === 'true') {
         read = 'already read'
@@ -28,13 +28,13 @@ const mobydick = new Book('Moby-Dick', 'Herman Melville', 135, 'false', `https:/
 const nineteenEightyFour = new Book('Nineteen Eighty-Four', 'George Orwell', 328, 'true', `https://res.cloudinary.com/demjqq8d3/image/upload/v1679886068/library/book6_s7jgal.jpg`, `Airstrip One, a province of the totalitarian superstate Oceania, is led by Big Brother, a dictatorial leader. Through the Ministry of Truth, the Party engages in surveillance, historical negationism, and propaganda to persecute individuality and independent thinking.`)
 const deathNote = new Book('Death Note', 'Tsugumi Ohba', 392, 'true', `https://res.cloudinary.com/demjqq8d3/image/upload/v1679886068/library/book7_ioqws2.jpg`, `Light Yagami discovers a mysterious notebook that grants him the supernatural ability to kill anyone whose name is written in its pages. The series centers around Light's attempts to use the Death Note to massacre people he deems immoral and to create a crime-free society, and the efforts of an elite task force, led by detective L, to apprehend him.`)
 const onePiece = new Book('One Piece', 'Eiichiro Oda', 186, 'true', `https://res.cloudinary.com/demjqq8d3/image/upload/v1679886069/library/book8_ekxhnz.jpg`, `Monkey D. Luffy, a 17-year-old boy that defies your standard definition of a pirate. Rather than the popular persona of a wicked, hardened, toothless pirate who ransacks villages for fun, Luffy’s reason for being a pirate is one of pure wonder; the thought of an exciting adventure and meeting new and intriguing people, along with finding the One Piece.`)
+
 //INPUT: LIBRARY
 let myLibrary = [];
 function addBookToLibrary(...label) {
     //push to myLibrary
     myLibrary.push(...label)
 }
-//
 addBookToLibrary(theHobbit, animalFarm, theGreatGatsby, annaKarenina, donQuixote, mobydick, nineteenEightyFour, deathNote, onePiece)
 
 //PROCESS DATA TO THE HTML
@@ -95,7 +95,7 @@ const showBooks = function () {
         deleteBook.style.display = 'none'
         bookDisplay.append(deleteBook)
         //event listener => show pages,synopsis,readStatus,deleteBook
-        bookDisplay.addEventListener('mouseover', function () {
+        bookDisplay.addEventListener('mouseover', function() {
             pages.style.display = 'block'
             synopsis.style.display = 'block'
             readStatus.style.display = 'block'
@@ -104,7 +104,7 @@ const showBooks = function () {
                 cover.className = "coverOnFocus";
             }
         })
-        bookDisplay.addEventListener('mouseleave', function () {
+        bookDisplay.addEventListener('mouseleave', function() {
             pages.style.display = 'none'
             synopsis.style.display = 'none'
             readStatus.style.display = 'none'
@@ -114,7 +114,7 @@ const showBooks = function () {
             }
         })
         //event listener => deleteBook
-        deleteBook.addEventListener('click', function () {
+        deleteBook.addEventListener('click', function() {
             const selectedBook = document.querySelector(`.book${x}`)
             selectedBook.remove()
             console.log('deleting ' + myLibrary[x].title)
@@ -132,7 +132,13 @@ form.addEventListener('submit', function (e) {
     const f = new FormData(form);
     const o = Object.fromEntries(f);
     console.log(o.inputRead)
-    const newBook = new Book(o.inputTitle = 'untitled', o.inputAuthor = 'anonymous', o.inputPages = 0, o.inputRead, o.inputCover = `https://i.pinimg.com/originals/25/2a/04/252a045199e33164a8b7577fc001851a.jpg`, o.inputSynopsis = 'empty');
+    const newBook = new Book(
+        o.inputTitle,
+        o.inputAuthor,
+        o.inputPages,
+        o.inputRead,
+        o.inputCover,
+        o.inputSynopsis);
     addBookToLibrary(newBook)
     showBooks()
 })
