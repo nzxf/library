@@ -49,7 +49,7 @@ const showBooks = function () {
     for (let x = 0; x < myLibrary.length; x++) {
         //create div.bookcase
         const bookDisplay = document.createElement('DIV')
-        bookDisplay.classList.add(`book${x}`)
+        bookDisplay.classList.add(`book${x}`, "book-display")
         bookShelf.append(bookDisplay)
         //create img.cover
         const cover = document.createElement('IMG')
@@ -74,44 +74,38 @@ const showBooks = function () {
         const pages = document.createElement('P')
         pages.innerText = `(${myLibrary[x].pages} pages)`
         pages.classList.add('pages')
-        pages.style.display = 'none'
+        // pages.style.display = 'none'
+        pages.classList.add('hidden')
         bookInfo.append(pages)
         //create p.synopsis
         const synopsis = document.createElement('P')
         synopsis.innerText = myLibrary[x].synopsis
         synopsis.classList.add('synopsis')
-        synopsis.style.display = 'none'
+        // synopsis.style.display = 'none'
+        synopsis.classList.add('hidden')
         bookInfo.append(synopsis)
         //create p.readStatus
         const readStatus = document.createElement('P')
         readStatus.innerText = `status: ${myLibrary[x].info()}`
         readStatus.classList.add('readStatus')
-        readStatus.style.display = 'none'
+        // readStatus.style.display = 'none'
+        readStatus.classList.add('hidden')
         bookInfo.append(readStatus)
         //create button.delete
         const deleteBook = document.createElement('button')
         deleteBook.innerText = 'x'
         deleteBook.classList.add('deleteBook')
-        deleteBook.style.display = 'none'
+        // deleteBook.style.display = 'none'
+        deleteBook.classList.add('hidden')
         bookDisplay.append(deleteBook)
         //event listener => show pages,synopsis,readStatus,deleteBook
-        bookDisplay.addEventListener('mouseover', function() {
-            pages.style.display = 'block'
-            synopsis.style.display = 'block'
-            readStatus.style.display = 'block'
-            deleteBook.style.display = 'block'
-            if (cover.className == "cover") {
-                cover.className = "coverOnFocus";
-            }
-        })
-        bookDisplay.addEventListener('mouseleave', function() {
-            pages.style.display = 'none'
-            synopsis.style.display = 'none'
-            readStatus.style.display = 'none'
-            deleteBook.style.display = 'none'
-            if (cover.className == "coverOnFocus") {
-                cover.className = "cover";
-            }
+        bookDisplay.addEventListener('click', function() {
+            bookDisplay.classList.toggle("book-display-active")
+            cover.classList.toggle("coverOnFocus")
+                pages.classList.toggle('visible')
+                synopsis.classList.toggle('visible')
+                readStatus.classList.toggle('visible')
+                deleteBook.classList.toggle('visible')
         })
         //event listener => deleteBook
         deleteBook.addEventListener('click', function() {
@@ -129,16 +123,16 @@ showBooks()
 const form = document.querySelector('FORM')
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    const f = new FormData(form);
-    const o = Object.fromEntries(f);
-    console.log(o.inputRead)
+    const newForm = new FormData(form);
+    const newInput = Object.fromEntries(newForm);
+    console.log(newInput.inputRead)
     const newBook = new Book(
-        o.inputTitle,
-        o.inputAuthor,
-        o.inputPages,
-        o.inputRead,
-        o.inputCover,
-        o.inputSynopsis);
+        newInput.inputTitle,
+        newInput.inputAuthor,
+        newInput.inputPages,
+        newInput.inputRead,
+        newInput.inputCover,
+        newInput.inputSynopsis);
     addBookToLibrary(newBook)
     showBooks()
 })
