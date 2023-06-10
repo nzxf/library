@@ -212,26 +212,68 @@ const proceedData = () => {
 const wordRegExp = /([a-zA-Z])\w+/g;
 const digitRegExp = /([0-9])\d+/;
 const urlRegExp =
-/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+  /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
 const form = document.querySelector('FORM');
-const title = document.querySelector('#title')
-const author = document.querySelector('#author')
-const pages = document.querySelector('#pages')
-const synopsis = document.querySelector('#synopsis')
-const cover = document.querySelector('#cover')
+const errors = document.querySelectorAll('p.error');
+const titleError = document.querySelector('.title-error')
+const authorError = document.querySelector('.author-error')
+
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const synopsis = document.querySelector('#synopsis');
+const cover = document.querySelector('#cover');
 //adding a new book
 
-window.addEventListener('load', ()=>{
-    const isvalid = title.value.length === 0 || wordRegExp.test(title.value)
-    title.className = isvalid? 'valid' : 'invalid'
-})
+// window.addEventListener('load', () => {
+//   const isValid = title.value.length === 0 || wordRegExp.test(title.value);
+//   title.className = isValid ? 'valid' : 'invalid';
+// });
 
-
+title.addEventListener('input', () => {
+  const isValid = title.value.length === 0 || wordRegExp.test(title.value);
+  if (isValid) {
+    title.className = 'valid';
+    titleError.textContent = 'Ah good one';
+    titleError.className = 'error';
+  } else {
+    title.className = 'invalid';
+  }
+});
+author.addEventListener('input', () => {
+  const isValid = author.value.length === 0 || wordRegExp.test(author.value);
+  if (isValid) {
+    author.className = 'valid';
+    authorError.textContent = 'Never heard that one';
+    authorError.className = 'error';
+  } else {
+    author.className = 'invalid';
+  }
+});
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // DATA VALID
-  proceedData();
+  const titleValid = title.value.length === 0 || wordRegExp.test(title.value);
+  if (!titleValid) {
+    title.className = 'invalid';
+    titleError.textContent = 'Enter a book title, please';
+    titleError.className = 'error-active';
+  } else {
+    title.className = 'valid';
+    titleError.textContent = '';
+    titleError.className = 'error';
+  }
+
+  const authorValid = author.value.length === 0 || wordRegExp.test(author.value);
+  if (!authorValid) {
+    author.className = 'invalid';
+    authorError.textContent = 'Enter a book author, please';
+    authorError.className = 'error-active';
+  } else {
+    author.className = 'valid';
+    authorError.textContent = '';
+    authorError.className = 'error';
+  }
 });
