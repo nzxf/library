@@ -209,15 +209,18 @@ const proceedData = () => {
   showBooks();
 };
 
-const wordRegExp = /([a-zA-Z])\w+/g;
+const wordRegExp = /([a-zA-Z0-9])\w+/;
 const digitRegExp = /([0-9])\d+/;
 const urlRegExp =
   /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
 const form = document.querySelector('FORM');
-const errors = document.querySelectorAll('p.error');
-const titleError = document.querySelector('.title-error')
-const authorError = document.querySelector('.author-error')
+// const feedbacks = document.querySelectorAll('p.error');
+const titleFeedback = document.querySelector('.title-feedback');
+const authorFeedback = document.querySelector('.author-feedback');
+const pagesFeedback = document.querySelector('.pages-feedback');
+const synopsisFeedback = document.querySelector('.synopsis-feedback');
+const coverFeedback = document.querySelector('.cover-feedback');
 
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
@@ -235,8 +238,8 @@ title.addEventListener('input', () => {
   const isValid = title.value.length === 0 || wordRegExp.test(title.value);
   if (isValid) {
     title.className = 'valid';
-    titleError.textContent = 'Ah good one';
-    titleError.className = 'error';
+    titleFeedback.textContent = 'Ah good one';
+    titleFeedback.className = 'feedback-valid';
   } else {
     title.className = 'invalid';
   }
@@ -245,35 +248,98 @@ author.addEventListener('input', () => {
   const isValid = author.value.length === 0 || wordRegExp.test(author.value);
   if (isValid) {
     author.className = 'valid';
-    authorError.textContent = 'Never heard that one';
-    authorError.className = 'error';
+    authorFeedback.textContent = 'Never heard that one';
+    authorFeedback.className = 'feedback-valid';
   } else {
     author.className = 'invalid';
+  }
+});
+pages.addEventListener('input', () => {
+  const isValid = pages.value.length === 0 || wordRegExp.test(pages.value);
+  if (isValid) {
+    pages.className = 'valid';
+    pagesFeedback.textContent = "Wow that's thick one";
+    pagesFeedback.className = 'feedback-valid';
+  } else {
+    pages.className = 'invalid';
+  }
+});
+synopsis.addEventListener('input', () => {
+  const isValid =
+    synopsis.value.length === 0 || wordRegExp.test(synopsis.value);
+  if (isValid) {
+    synopsis.className = 'valid';
+    synopsisFeedback.textContent = 'Never heard that one';
+    synopsisFeedback.className = 'feedback-valid';
+  } else {
+    synopsis.className = 'invalid';
+  }
+});
+cover.addEventListener('input', () => {
+  const isValid = cover.value.length === 0 || wordRegExp.test(cover.value);
+  if (isValid) {
+    cover.className = 'valid';
+    coverFeedback.textContent = 'Nice';
+    coverFeedback.className = 'feedback-valid';
+  } else {
+    cover.className = 'invalid';
   }
 });
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-
+  // TITLE
   const titleValid = title.value.length === 0 || wordRegExp.test(title.value);
   if (!titleValid) {
     title.className = 'invalid';
-    titleError.textContent = 'Enter a book title, please';
-    titleError.className = 'error-active';
-  } else {
-    title.className = 'valid';
-    titleError.textContent = '';
-    titleError.className = 'error';
+    titleFeedback.textContent = 'Enter a book title, please';
+    return (titleFeedback.className = 'feedback-invalid');
   }
-
-  const authorValid = author.value.length === 0 || wordRegExp.test(author.value);
+  title.className = 'valid';
+  titleFeedback.textContent = '';
+  titleFeedback.className = 'feedback';
+  // AUTHOR
+  const authorValid =
+    author.value.length === 0 || wordRegExp.test(author.value);
   if (!authorValid) {
     author.className = 'invalid';
-    authorError.textContent = 'Enter a book author, please';
-    authorError.className = 'error-active';
-  } else {
-    author.className = 'valid';
-    authorError.textContent = '';
-    authorError.className = 'error';
+    authorFeedback.textContent = 'Enter the author name, please';
+    return (authorFeedback.className = 'feedback-invalid');
   }
+  author.className = 'valid';
+  authorFeedback.textContent = '';
+  authorFeedback.className = 'feedback';
+  // PAGES
+  const pagesValid = pages.value.length === 0 || digitRegExp.test(pages.value);
+  if (!pagesValid) {
+    pages.className = 'invalid';
+    pagesFeedback.textContent = 'Enter total amount of the page, please';
+    return (pagesFeedback.className = 'feedback-invalid');
+  }
+  pages.className = 'valid';
+  pagesFeedback.textContent = '';
+  pagesFeedback.className = 'feedback';
+  // SYNOPSIS
+  const synopsisValid =
+    synopsis.value.length === 0 || wordRegExp.test(synopsis.value);
+  if (!synopsisValid) {
+    synopsis.className = 'invalid';
+    synopsisFeedback.textContent = 'Enter the book synopsis, please';
+    return (synopsisFeedback.className = 'feedback-invalid');
+  }
+  synopsis.className = 'valid';
+  synopsisFeedback.textContent = '';
+  synopsisFeedback.className = 'feedback';
+  // COVER
+  const coverValid = cover.value.length === 0 || urlRegExp.test(cover.value);
+  if (!coverValid) {
+    cover.className = 'invalid';
+    coverFeedback.textContent = 'Enter the url of the book cover, please';
+    return (coverFeedback.className = 'feedback-invalid');
+  }
+  cover.className = 'valid';
+  coverFeedback.textContent = '';
+  coverFeedback.className = 'feedback';
+  // PROCEED DATA INPUT
+  proceedData()
 });

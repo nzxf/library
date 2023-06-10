@@ -133,18 +133,30 @@ footer {
 
 /* FORM VALIDATION */
 
-input.invalid {
-  border: solid 1px red;
+input.valid {
+  border: solid 3px green;
 }
 
-.error {
+input.invalid {
+  border: solid 3px red;
+}
+
+.feedback {
   color: palevioletred;
   border-radius: 5px;
+  width: 100%;
+  height: 2rem;
   display: none;
 }
 
-.error-active {
+.feedback-invalid {
   background-color: red;
   color: white;
   display: block;
+}
+
+.feedback-valid {
+  color: white;
+  display: block;
+  background-color: greenyellow;
 }
