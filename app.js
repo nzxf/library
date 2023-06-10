@@ -285,7 +285,6 @@ cover.addEventListener('input', () => {
     cover.className = 'invalid';
   }
 });
-
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   // TITLE
@@ -343,3 +342,5 @@ form.addEventListener('submit', function (e) {
   // PROCEED DATA INPUT
   proceedData()
 });
+
+proceedData()
