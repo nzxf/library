@@ -343,4 +343,4 @@ form.addEventListener('submit', function (e) {
   proceedData()
 });
 
-proceedData()
+showBooks()
