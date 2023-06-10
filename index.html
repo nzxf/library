@@ -24,26 +24,31 @@
         <div class="side-bar">
             <div class="add-book">
                 <h2>Add a New Book</h2>
-                <form action="#">
+                <form action="#" novalidate>
                     <div>
                         <label for="title">Title: </label>
                         <input id="title" type="text" name="inputTitle">
+                        <p class="error"></p>
                     </div>
                     <div>
                         <label for="author">Author: </label>
                         <input id="author" type="text" name="inputAuthor">
+                        <p class="error"></p>
                     </div>
                     <div>
                         <label for="pages">Pages: </label>
                         <input id="pages" type="number" name="inputPages">
+                        <p class="error"></p>
                     </div>
                     <div>
                         <label for="synopsis">Synopsis: </label>
                         <textarea id="synopsis" name="inputSynopsis" cols="30" rows="3"></textarea>
+                        <p class="error"></p>
                     </div>
                     <div>
                         <label for="cover">Cover (url): </label>
                         <input id="cover" type="text" name="inputCover">
+                        <p class="error"></p>
                     </div>
                     <div>
                         <Legend>Read Status: </Legend>

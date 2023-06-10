@@ -102,9 +102,6 @@ main {
     display: block;
 }
 
-
-
-
 .side-bar {
     height: 450px;
     margin-left: 25px;
@@ -132,4 +129,21 @@ footer {
     .bookshelf {
         margin-bottom: 30px;
     }
+}
+
+/* FORM VALIDATION */
+
+input.invalid {
+ border: solid 1px red;
+ background-color: plum;
+}
+
+.error {
+    color: palevioletred;
+    border-radius: 5px;
+}
+
+.error-active {
+    background-color: red;
+    color: white;
 }
